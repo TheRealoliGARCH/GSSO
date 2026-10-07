@@ -1,6 +1,6 @@
-# GSSO v0.2 — Controlled Evaluation
+# GSSO v0.3 — Controlled Robustness Evaluation
 
-This repository implements the first falsifiable experiments from the GSSO paper: whether active information acquisition can improve systemic-crisis warning relative to passive monitoring.
+This repository implements controlled computational tests of the GSSO active-observation mechanism.
 
 ## v0.1
 
@@ -17,7 +17,7 @@ The active selection rule is:
 
 j* = argmax_j IG(j)/(C(j)+epsilon).
 
-This is deliberately not the full GSSO. It isolates the active-observation mechanism before adding a learned world model, heterogeneous agents, or MARL.
+This deliberately isolates the active-observation mechanism before adding a learned world model, heterogeneous agents, or MARL.
 
 ## v0.2
 
@@ -30,13 +30,21 @@ The controlled evaluation layer adds:
 - a controlled synthetic crisis-generating process;
 - a reproducible passive-versus-active evaluation.
 
-The comparison is deliberately capacity-controlled at this stage: both observers operate on the same synthetic environment, while the active observer may choose among alternative observations with explicit costs.
+## v0.3
+
+The robustness layer varies controlled observation conditions:
+- weak financial signal;
+- baseline financial signal;
+- strong financial signal;
+- expensive financial signal.
+
+The purpose is not to establish real-world superiority. It is to determine whether the observed active-versus-passive difference is sensitive to the signal-strength and acquisition-cost assumptions.
 
 ## Scientific discipline
 
 observation != inference != prediction != causal claim != policy
 
-The v0.2 experiment is a controlled computational experiment, not evidence of real-world crisis-prediction performance.
+All v0.x experiments are controlled computational experiments. They are not evidence of real-world systemic-crisis prediction performance.
 
 ## Run
 
@@ -44,13 +52,15 @@ The v0.2 experiment is a controlled computational experiment, not evidence of re
 python -m unittest discover -s tests -v
 python experiments/run_v01.py
 python experiments/evaluate_v02.py
+python experiments/stress_test_v03.py
 ```
 
 ## Roadmap
 
-1. Add controlled synthetic crisis-generating processes.
-2. Make passive and active observers use identical model capacity.
-3. Measure warning lead time, AUC, calibration, false-warning duration, and information cost.
-4. Add the hybrid State-Attention world model.
-5. Introduce a learned traveling agent.
-6. Only then evaluate heterogeneous agents and MARL.
+1. Controlled robustness testing.
+2. Multiple independently generated crisis paths.
+3. Statistical aggregation across replications.
+4. Calibration and uncertainty analysis.
+5. Add the hybrid State-Attention world model.
+6. Introduce a learned traveling agent.
+7. Only then evaluate heterogeneous agents and MARL.
