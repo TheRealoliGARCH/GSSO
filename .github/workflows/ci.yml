@@ -24,3 +24,6 @@ jobs:
 
       - name: Run v0.1 experiment
         run: python experiments/run_v01.py
+
+      - name: Run v0.2 controlled evaluation
+        run: python experiments/evaluate_v02.py
