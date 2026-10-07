@@ -37,9 +37,8 @@ def evaluate_scenarios(
 ) -> dict[str, dict[str, float]]:
     if not scenarios:
         raise ValueError("scenarios must be non-empty")
-    return {
-        name: scenario_summary(
-            [evaluator(name)[0]], [evaluator(name)[1]]
-        )
-        for name in scenarios
-    }
+    result = {}
+    for name in scenarios:
+        baseline, active = evaluator(name)
+        result[name] = scenario_summary([baseline], [active])
+    return result
